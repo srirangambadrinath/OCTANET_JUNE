@@ -1,0 +1,77 @@
+def get_pin():
+    """Prompts user for PIN and validates it (dummy validation in this example)"""
+    while True:
+        pin = input("Enter your PIN: ")
+        if pin == "0208":  # Replace with stronger validation logic
+            return pin
+        else:
+            print("Incorrect PIN. Please try again.")
+
+def display_menu():
+    """Prints the ATM menu options"""
+    print("\nATM Menu:")
+    print("1. Check Balance")
+    print("2. Withdraw Cash")
+    print("3. Deposit Cash")
+    print("4. Mini Statement")
+    print("5. Exit")
+
+def check_balance(balance):
+    """Displays the current balance"""
+    print(f"\nYour current balance is: Rs.{balance}")
+
+def withdraw_cash(balance):
+    """Prompts user for withdrawal amount and updates balance (basic logic)"""
+    try:
+        amount = float(input("\nEnter amount to withdraw: "))
+        if 0 < amount <= balance:
+            balance -= amount
+            print(f"\nWithdrawal successful. Please collect your cash. New balance: Rs.{balance}")
+        else:
+            print("\nInvalid amount or insufficient funds.")
+    except ValueError:
+        print("\nInvalid input. Please enter a numerical value.")
+    return balance
+
+def deposit_cash(balance):
+    """Prompts user for deposit amount and updates balance (basic logic)"""
+    try:
+        amount = float(input("\nEnter amount to deposit: "))
+        if amount > 0:
+            balance += amount
+            print(f"\nDeposit successful. New balance: Rs.{balance}")
+        else:
+            print("\nInvalid deposit amount.")
+    except ValueError:
+        print("\nInvalid input. Please enter a numerical value.")
+    return balance
+
+def mini_statement():
+    """Displays a message for mini statement"""
+    print("\nPlease contact nearest branch for the mini statement.")
+
+def main():
+    """Simulates the ATM program"""
+    balance = 242400  # Dummy starting balance
+    pin = get_pin()
+
+    while True:
+        display_menu()
+        choice = input("\nEnter your choice (1-5): ")
+
+        if choice == '1':
+            check_balance(balance)
+        elif choice == '2':
+            balance = withdraw_cash(balance)
+        elif choice == '3':
+            balance = deposit_cash(balance)
+        elif choice == '4':
+            mini_statement()
+        elif choice == '5':
+            print("\nThank you for using the ATM. Goodbye! HAVE A NICE DAY.")
+            break
+        else:
+            print("\nInvalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
